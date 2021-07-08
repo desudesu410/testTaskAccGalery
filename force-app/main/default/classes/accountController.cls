@@ -9,7 +9,9 @@ public with sharing class AccountController {
 				Budget__c,
 				Number_of_Employees__c, 
 				Picture_Url__c,
-				Type 
+				Type,
+				Industry,
+				Description
 			FROM Account
 			ORDER BY Name
 		];
@@ -28,7 +30,9 @@ public with sharing class AccountController {
 				Budget__c,
 				Number_of_Employees__c, 
 				Picture_Url__c,
-				Type 
+				Type,
+				Industry,
+				Description
 			FROM Account
 			WHERE Type = :accountType
 			ORDER BY Name

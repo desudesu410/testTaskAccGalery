@@ -1,15 +1,15 @@
 import { LightningElement, wire, api } from 'lwc';
 import { subscribe, unsubscribe, MessageContext } from 'lightning/messageService';
 import ACCOUNT_DETAILS_UPDATED_CHANNEL from '@salesforce/messageChannel/Account_Details_Updated__c';
-import getAccountDetails from '@salesforce/apex/AccountDetailsController.getAccountDetails'
 import { NavigationMixin } from 'lightning/navigation';
 
 export default class AccountDetails extends NavigationMixin(LightningElement) {
   subscription = null;
-  @api account = null;
+  account;
   @wire(MessageContext) messageContext;
 
   connectedCallback() {
+    console.log(this.account)
     this.subscription = subscribe(
       this.messageContext,
       ACCOUNT_DETAILS_UPDATED_CHANNEL,
@@ -23,15 +23,7 @@ export default class AccountDetails extends NavigationMixin(LightningElement) {
   }
 
   handleMessage(message) {
-    getAccountDetails({accountId: message.account})
-      .then(result => {
-        this.account = result;
-        this.error = undefined;
-      })
-      .catch(error => {
-        this.error = error;
-        this.account = undefined;
-      });
+    this.account = message.account;
   }
 
   handleOpenFullAccountDetails() {
