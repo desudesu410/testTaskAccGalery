@@ -8,10 +8,17 @@
       options={picklistOptions}
       onchange={handleAccountTypesChange}>
     </lightning-combobox>
-    <lightning-layout class="slds-m-top_xx-large slds-grid_align-center" multiple-rows="true">
+    <lightning-layout 
+      class="slds-m-top_xx-large slds-grid_align-center"
+      multiple-rows="true">
       <template for:each={accounts} for:item="account">
-        <lightning-layout-item class="slds-box slds-m-around_xxx-small list-item" key={account.Id} padding="around_xxx-small">
-          <c-account-tile account={account}></c-account-tile>
+        <lightning-layout-item 
+          class="slds-box slds-m-around_xxx-small list-item" 
+          key={account.Id} 
+          padding="around_xxx-small">
+          <c-account-tile 
+            account={account}>
+          </c-account-tile>
         </lightning-layout-item>
       </template>
     </lightning-layout>

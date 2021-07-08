@@ -10,27 +10,34 @@ export default class AccountList extends LightningElement {
   }) accountTypesPicklistValues;
   accounts;
   error;
-  picklistValue  = 'allTypes';
+  picklistValueSelected = 'allTypes';
 
-  connectedCallback() {
-    getAccounts()
+  get picklistOptions() {
+    const allTypesValue = {value: 'allTypes', label: 'All Types'};
+    const options = JSON.stringify(this.accountTypesPicklistValues?.data?.values);
+    return options 
+      ? [allTypesValue, ...JSON.parse(options)]
+      : [allTypesValue];
+  }
+
+  accountsRender() {
+    getAccounts({accountType: this.picklistValueSelected})
       .then(result => {
         this.accounts = result;
+        this.error = undefined;
       })
       .catch(error => {
         this.error = error;
+        this.accounts = undefined;
       });
   }
-  
-  get picklistOptions() {
-    const allTypes = {value: 'allTypes', label: 'All Types'};
-    const options = JSON.stringify(this.accountTypesPicklistValues?.data?.values);
-    return options 
-      ? [allTypes, ...JSON.parse(options)]
-      : [allTypes];
-  }
 
+  connectedCallback() {
+    this.accountsRender();
+  }
+  
   handleAccountTypesChange(event) {
-    this.picklistValue = event.detail.value;
+    this.picklistValueSelected = event.detail.value;
+    this.accountsRender();
   }
 }
