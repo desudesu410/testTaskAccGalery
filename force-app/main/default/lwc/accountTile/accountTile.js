@@ -5,4 +5,10 @@ export default class AccountTile extends LightningElement {
   @api account;
   noPicture = `${accountGalleryResources}/img/no-photo.png`
 
+  handleAccountDetail() {
+    const selectEvent = new CustomEvent('accountclick', {
+      detail: this.account.Id
+    });
+    this.dispatchEvent(selectEvent);
+  }
 }

@@ -1,5 +1,5 @@
 public with sharing class AccountController {
-	@AuraEnabled(Cacheable=true)
+	@AuraEnabled(Cacheable = true)
 	public static Account[] getAllAccounts() {
 		return [
 			SELECT
@@ -15,7 +15,7 @@ public with sharing class AccountController {
 		];
 	}
 
-	@AuraEnabled(Cacheable=true)
+	@AuraEnabled(Cacheable = true)
 	public static Account[] getAccounts(String accountType) {
 		if (accountType == 'allTypes') {
 			return getAllAccounts();
