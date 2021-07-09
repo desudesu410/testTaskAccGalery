@@ -4,40 +4,42 @@
       <lightning-layout-item size="3" class="slds-box">
         <lightning-card title="Amount of budgets:">
           <p class="slds-m-left_large">
-            <lightning-formatted-text 
-              class="slds-text-title_bold"
+            <lightning-formatted-text class="slds-text-title_bold"
               value="JS: ">
             </lightning-formatted-text>
-            <lightning-formatted-number
-              format-style="currency"
-              minimum-fraction-digits="0" 
-              maximum-fraction-digits="0"
+            <lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
               value={sumBudgetAccounts}>
             </lightning-formatted-number>
           </p>
           <p class="slds-m-left_large">
-            <lightning-formatted-text 
-              class="slds-text-title_bold"
+            <lightning-formatted-text class="slds-text-title_bold"
               value="SOQL: ">
             </lightning-formatted-text>
-            <lightning-formatted-number
-              format-style="currency"
-              minimum-fraction-digits="0" 
-              maximum-fraction-digits="0"
-              value={sumBudgetAccountsSoql}>
-            </lightning-formatted-number>
+            <template if:true={sumBudgetAccountsSoql}>
+              <lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
+                value={sumBudgetAccountsSoql}>
+              </lightning-formatted-number>
+            </template>
+            <template if:true={sumBudgetAccountsSoqlError}>
+              <lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
+                value="An error has occurred.">
+              </lightning-formatted-number>
+            </template>
           </p>
           <p class="slds-m-left_large">
-            <lightning-formatted-text 
-              class="slds-text-title_bold"
+            <lightning-formatted-text class="slds-text-title_bold"
               value="Apex: ">
             </lightning-formatted-text>
-            <lightning-formatted-number
-              format-style="currency"
-              minimum-fraction-digits="0" 
-              maximum-fraction-digits="0"
-              value={sumBudgetAccountsApex}>
-            </lightning-formatted-number>
+            <template if:true={sumBudgetAccountsApex}>
+              <lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
+                value={sumBudgetAccountsApex}>
+              </lightning-formatted-number>
+            </template>
+            <template if:true={sumBudgetAccountsApexError}>
+              <lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
+                value="An error has occurred.">
+              </lightning-formatted-number>
+            </template>
           </p>
         </lightning-card>
       </lightning-layout-item>
@@ -51,19 +53,30 @@
         </lightning-combobox>
       </lightning-layout-item>
     </lightning-layout>    
-    <lightning-layout 
-      class="slds-m-top_xx-large slds-grid_align-center"
-      multiple-rows="true">
-      <template for:each={accounts} for:item="account">
-        <lightning-layout-item 
-          class="slds-box slds-m-around_xxx-small list-item" 
-          key={account.Id} 
-          padding="around_xxx-small">
+    <lightning-layout class="slds-m-top_xx-large slds-grid_align-center" multiple-rows="true">
+      <template if:true={accounts} for:each={accounts} for:item="account">
+        <lightning-layout-item class="slds-box slds-m-around_xxx-small list-item" padding="around_xxx-small"
+          key={account.Id}>
           <c-account-tile 
             account={account}
             onaccountclick={handleAccountDetails}>
           </c-account-tile>
         </lightning-layout-item>
+      </template>
+      <template if:true={accountsError}>
+        <p class='slds-text-align_center'>
+          <lightning-formatted-text
+            value="Oops! Somesing went wrong:(">
+          </lightning-formatted-text>
+        </p>
+        <p class='slds-text-align_center'>
+          <lightning-formatted-text
+            value="Error:">
+          </lightning-formatted-text>
+          <lightning-formatted-text
+            value={error}>
+          </lightning-formatted-text>
+        </p>
       </template>
     </lightning-layout>
   </lightning-card>

@@ -60,7 +60,9 @@ public with sharing class AccountController {
 		Double sumBudget = 0;
 		List<Account> listAccount = getAccounts(accountType);
 		for(Account acct : listAccount) {
-			sumBudget += acct.Budget__c;
+			if (acct.Budget__c != NULL) {
+				sumBudget += acct.Budget__c;
+			}
 		}
 		return sumBudget;
 	}

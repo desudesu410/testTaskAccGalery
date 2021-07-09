@@ -9,8 +9,7 @@
       <lightning-card title={account.Name} icon-name="standard:account">
         <div class="slds-m-around_large slds-box">
           <p class="slds-text-heading_small">
-            <lightning-formatted-text
-              class="slds-text-title_bold"
+            <lightning-formatted-text class="slds-text-title_bold"
               value="Account type: ">
             </lightning-formatted-text>
             <lightning-formatted-text
@@ -18,8 +17,7 @@
             </lightning-formatted-text>
           </p>
           <p class="slds-text-body_regular">
-            <lightning-formatted-text
-              class="slds-text-title_bold"
+            <lightning-formatted-text class="slds-text-title_bold"
               value="Industry: ">
             </lightning-formatted-text>
             <lightning-formatted-text
@@ -27,20 +25,15 @@
             </lightning-formatted-text>
           </p>
           <p class="slds-text-body_regular">
-            <lightning-formatted-text 
-              class="slds-text-title_bold"
+            <lightning-formatted-text class="slds-text-title_bold"
               value="Budget: ">
             </lightning-formatted-text>
-            <lightning-formatted-number 
-              value={account.Budget__c}
-              format-style="currency" 
-              minimum-fraction-digits="0" 
-              maximum-fraction-digits="0">
+            <lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
+              value={account.Budget__c}>
             </lightning-formatted-number>
           </p>
           <p class="slds-text-body_small">
-            <lightning-formatted-text
-              class="slds-text-title_bold"
+            <lightning-formatted-text class="slds-text-title_bold"
               value="Description: ">
             </lightning-formatted-text>
             <lightning-formatted-text
@@ -53,8 +46,8 @@
     <template if:false={account}>
       <p class='slds-text-align_center'>
         <lightning-formatted-text
-          value="Please, select an account."
-        ></lightning-formatted-text></p>
+          value="Please, select an account.">
+        </lightning-formatted-text></p>
     </template>
   </lightning-card>
 </template>
