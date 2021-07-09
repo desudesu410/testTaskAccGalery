@@ -1,0 +1,13 @@
+.account-details {
+  position: fixed;
+  width: 33%;
+}
+
+@media(max-width: 1025px) {
+  .account-details {
+    position: static;
+    width: 100vw;
+    bottom: 0;
+    left: 0;
+  }
+}
