@@ -1,9 +1,11 @@
 import { LightningElement, wire } from 'lwc';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
-import getAccounts from '@salesforce/apex/AccountController.getAccounts';
-import TYPE_FIELD from '@salesforce/schema/Account.Type';
 import { publish, MessageContext } from 'lightning/messageService';
 import ACCOUNT_DETAILS_UPDATED_CHANNEL from '@salesforce/messageChannel/Account_Details_Updated__c';
+import getAccounts from '@salesforce/apex/AccountController.getAccounts';
+import getsumBudgetAccountsSoql from '@salesforce/apex/AccountController.getsumBudgetAccountsSoql';
+import getsumBudgetAccountsApex from '@salesforce/apex/AccountController.getsumBudgetAccountsApex';
+import TYPE_FIELD from '@salesforce/schema/Account.Type';
 
 export default class AccountList extends LightningElement {
   @wire(MessageContext) messageContext;
@@ -13,6 +15,8 @@ export default class AccountList extends LightningElement {
   }) accountTypesPicklistValues;
   accounts;
   error;
+  sumBudgetAccountsSoql;
+  sumBudgetAccountsApex;
   picklistValueSelected = 'allTypes';
 
   get picklistOptions() {
@@ -23,7 +27,17 @@ export default class AccountList extends LightningElement {
       : [allTypesValue];
   }
 
-  accountsRender() {
+  get sumBudgetAccounts() {
+    return this.accounts?.reduce((sum, currAccount) => {
+      return sum + currAccount.Budget__c;
+    }, 0);
+  }
+
+  connectedCallback() {
+    this.getAccountsData();
+  }
+
+  getAccountsData() {
     getAccounts({accountType: this.picklistValueSelected})
       .then(result => {
         this.accounts = result;
@@ -33,21 +47,34 @@ export default class AccountList extends LightningElement {
         this.error = error;
         this.accounts = undefined;
       });
-  }
 
-  connectedCallback() {
-    this.accountsRender();
+    getsumBudgetAccountsSoql({accountType: this.picklistValueSelected})
+      .then(result => {
+        this.sumBudgetAccountsSoql = result;
+      })
+      .catch(error => {
+        this.error = error;
+      });
+
+    getsumBudgetAccountsApex({accountType: this.picklistValueSelected})
+      .then(result => {
+        this.sumBudgetAccountsApex = result;
+      })
+      .catch(error => {
+        this.error = error;
+      });
   }
   
   handleAccountTypesChange(event) {
     this.picklistValueSelected = event.detail.value;
-    this.accountsRender();
+    this.getAccountsData();
   }
 
   handleAccountDetails(event) {
     const message = {
-      account: event.detail
+      account: event.detail,
     };
     publish(this.messageContext, ACCOUNT_DETAILS_UPDATED_CHANNEL, message);
   }
+
 }

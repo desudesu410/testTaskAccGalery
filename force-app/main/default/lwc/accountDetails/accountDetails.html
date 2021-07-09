@@ -34,6 +34,7 @@
             <lightning-formatted-number 
               value={account.Budget__c}
               format-style="currency" 
+              minimum-fraction-digits="0" 
               maximum-fraction-digits="0">
             </lightning-formatted-number>
           </p>
@@ -48,6 +49,12 @@
           </p>
         </div>
       </lightning-card>
+    </template>
+    <template if:false={account}>
+      <p class='slds-text-align_center'>
+        <lightning-formatted-text
+          value="Please, select an account."
+        ></lightning-formatted-text></p>
     </template>
   </lightning-card>
 </template>

@@ -1,13 +1,56 @@
 <template>
   <lightning-card title="Find an account">
-    <lightning-combobox
-      name="accountTypes"
-      class="slds-size_1-of-3 slds-align_absolute-center"
-      value={picklistValue}
-      placeholder="Select Types"
-      options={picklistOptions}
-      onchange={handleAccountTypesChange}>
-    </lightning-combobox>
+    <lightning-layout horizontal-align="center" vertical-align="center">
+      <lightning-layout-item size="3" class="slds-box">
+        <lightning-card title="Amount of budgets:">
+          <p class="slds-m-left_large">
+            <lightning-formatted-text 
+              class="slds-text-title_bold"
+              value="JS: ">
+            </lightning-formatted-text>
+            <lightning-formatted-number
+              format-style="currency"
+              minimum-fraction-digits="0" 
+              maximum-fraction-digits="0"
+              value={sumBudgetAccounts}>
+            </lightning-formatted-number>
+          </p>
+          <p class="slds-m-left_large">
+            <lightning-formatted-text 
+              class="slds-text-title_bold"
+              value="SOQL: ">
+            </lightning-formatted-text>
+            <lightning-formatted-number
+              format-style="currency"
+              minimum-fraction-digits="0" 
+              maximum-fraction-digits="0"
+              value={sumBudgetAccountsSoql}>
+            </lightning-formatted-number>
+          </p>
+          <p class="slds-m-left_large">
+            <lightning-formatted-text 
+              class="slds-text-title_bold"
+              value="Apex: ">
+            </lightning-formatted-text>
+            <lightning-formatted-number
+              format-style="currency"
+              minimum-fraction-digits="0" 
+              maximum-fraction-digits="0"
+              value={sumBudgetAccountsApex}>
+            </lightning-formatted-number>
+          </p>
+        </lightning-card>
+      </lightning-layout-item>
+      <lightning-layout-item size="3" class="slds-m-left_small">
+        <lightning-combobox
+          name="accountTypes"
+          value={picklistValueSelected}
+          placeholder="Select Types"
+          options={picklistOptions}
+          onchange={handleAccountTypesChange}>
+        </lightning-combobox>
+      </lightning-layout-item>
+    </lightning-layout>    
     <lightning-layout 
       class="slds-m-top_xx-large slds-grid_align-center"
       multiple-rows="true">

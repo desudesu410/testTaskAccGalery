@@ -1,16 +1,17 @@
-import { LightningElement, wire, api } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import { subscribe, unsubscribe, MessageContext } from 'lightning/messageService';
-import ACCOUNT_DETAILS_UPDATED_CHANNEL from '@salesforce/messageChannel/Account_Details_Updated__c';
 import { NavigationMixin } from 'lightning/navigation';
+import ACCOUNT_DETAILS_UPDATED_CHANNEL from '@salesforce/messageChannel/Account_Details_Updated__c';
+
 
 export default class AccountDetails extends NavigationMixin(LightningElement) {
-  subscription = null;
+  subscriptionToDetails = null;
   account;
+
   @wire(MessageContext) messageContext;
 
   connectedCallback() {
-    console.log(this.account)
-    this.subscription = subscribe(
+    this.subscriptionToDetails = subscribe(
       this.messageContext,
       ACCOUNT_DETAILS_UPDATED_CHANNEL,
       (message) => this.handleMessage(message)
@@ -18,8 +19,8 @@ export default class AccountDetails extends NavigationMixin(LightningElement) {
   }
 
   disconnectedCallback() {
-    unsubscribe(this.subscription);
-    this.subscription = null;
+    unsubscribe(this.subscriptionToDetails);
+    this.subscriptionToDetails = null;
   }
 
   handleMessage(message) {
