@@ -27,14 +27,14 @@ export default class AccountDetails extends NavigationMixin(LightningElement) {
   }
 
   handleOpenFullAccountDetails() {
-		const accountId = this.account.Id;
-		this[NavigationMixin.Navigate]({
-			type: 'standard__recordPage',
-			attributes: {
-				recordId: accountId,
-				objectApiName: 'Account',
-				actionName: 'view',
-			},
-		});
+    const accountId = this.account.Id;
+    this[NavigationMixin.Navigate]({
+      type: 'standard__recordPage',
+      attributes: {
+        recordId: accountId,
+        objectApiName: 'Account',
+        actionName: 'view',
+      },
+    });
   }
 }
