@@ -17,6 +17,7 @@ export default class AccountList extends LightningElement {
     recordTypeId: '$objectInfo.data.defaultRecordTypeId', 
     fieldApiName: TYPE_FIELD
   }) accountTypesPicklistValues;
+  picklistValueSelected = 'allTypes';
   accounts;
   errorAccounts;
   sumBudgetAccountsJs;
@@ -24,7 +25,6 @@ export default class AccountList extends LightningElement {
   errorSumBudgetAccountsSoql;
   sumBudgetAccountsApex;
   errorSumBudgetAccountsSoql;
-  picklistValueSelected = 'allTypes';
   selectedTile;
 
   get picklistOptions() {
