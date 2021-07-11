@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
-    <masterLabel>AccountDetailsUpdated</masterLabel>
-    <isExposed>true</isExposed>
-    <description>Message Channel to pass Account Details updates</description>
-     <lightningMessageFields>
-        <fieldName>account</fieldName>
-        <description>This is the details of the account</description>
-    </lightningMessageFields>
+  <masterLabel>AccountDetailsUpdated</masterLabel>
+  <isExposed>true</isExposed>
+  <description>Message Channel to pass Account Details updates</description>
+    <lightningMessageFields>
+    <fieldName>account</fieldName>
+    <description>This is the details of the account</description>
+  </lightningMessageFields>
 </LightningMessageChannel>

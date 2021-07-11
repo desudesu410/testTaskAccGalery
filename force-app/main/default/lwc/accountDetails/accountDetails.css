@@ -1,7 +1,6 @@
 .account-details {
   width: 33.5%;
 }
-
 @media(max-width: 1025px) {
   .account-details {
     position: static;

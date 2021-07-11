@@ -1,58 +1,58 @@
 <template>
-	<div onclick={handleAccountDetail} class='account-tile slds-box slds-p-around_small'>
-		<template if:true={account.Building_Photo__c}>
-			<img class="slds-align_absolute-center account-image" 
-				src={account.Building_Photo__c} 
-				alt="Account photo"
-			>
-		</template>
-		<template if:false={account.Building_Photo__c}>
-			<img class="slds-align_absolute-center account-image"
-				src={noPictureImage} 
-				alt="No Photo"
-			>
-		</template>
-		<div class="slds-m-top_xx-small slds-m-left_xx-small">
-			<p class="slds-text-body_regular">
-				<lightning-formatted-text class="slds-text-title_bold"
-					value="Name: ">
-				</lightning-formatted-text>
-				<lightning-formatted-text
-					value={account.Name}>
-				</lightning-formatted-text>
-			</p>
-			<p class="slds-text-body_regular">
-				<lightning-formatted-text class="slds-text-title_bold"
-					value="Owner: ">
-				</lightning-formatted-text>
-				<lightning-formatted-text
-					value={account.Owner.Name}>
-				</lightning-formatted-text>
-			</p>
-			<p class="slds-text-body_small">
-				<lightning-formatted-text class="slds-text-title_bold"
-					value="Budget: ">
-				</lightning-formatted-text>
-				<lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
-					value={account.Budget__c}>
-				</lightning-formatted-number>
-			</p>
-			<p class="slds-text-body_small">
-				<lightning-formatted-text class="slds-text-title_bold"
-					value="Employees: ">
-				</lightning-formatted-text>
-				<lightning-formatted-number
-					value={account.Number_of_Employees__c}>
-				</lightning-formatted-number>
-			</p>
-			<p class="slds-text-body_small">
-				<lightning-formatted-text	class="slds-text-title_bold"
-					value="Type: ">
-				</lightning-formatted-text>
-				<lightning-formatted-text
-					value={account.Type}>
-				</lightning-formatted-text>
-			</p>
-		</div>
-	</div>
+<div onclick={handleAccountDetail} class='account-tile slds-box slds-p-around_small'>
+  <template if:true={account.Building_Photo__c}>
+    <img class="slds-align_absolute-center account-image" 
+      src={account.Building_Photo__c} 
+      alt="Account photo"
+    >
+  </template>
+  <template if:false={account.Building_Photo__c}>
+    <img class="slds-align_absolute-center account-image"
+      src={noPictureImage} 
+      alt="No Photo"
+    >
+  </template>
+  <div class="slds-m-top_xx-small slds-m-left_xx-small">
+    <p class="slds-text-body_regular">
+      <lightning-formatted-text class="slds-text-title_bold"
+        value="Name: ">
+      </lightning-formatted-text>
+      <lightning-formatted-text
+        value={account.Name}>
+      </lightning-formatted-text>
+    </p>
+    <p class="slds-text-body_regular">
+      <lightning-formatted-text class="slds-text-title_bold"
+        value="Owner: ">
+      </lightning-formatted-text>
+      <lightning-formatted-text
+        value={account.Owner.Name}>
+      </lightning-formatted-text>
+    </p>
+    <p class="slds-text-body_small">
+      <lightning-formatted-text class="slds-text-title_bold"
+        value="Budget: ">
+      </lightning-formatted-text>
+      <lightning-formatted-number format-style="currency" minimum-fraction-digits="0" maximum-fraction-digits="0"
+        value={account.Budget__c}>
+      </lightning-formatted-number>
+    </p>
+    <p class="slds-text-body_small">
+      <lightning-formatted-text class="slds-text-title_bold"
+        value="Employees: ">
+      </lightning-formatted-text>
+      <lightning-formatted-number
+        value={account.Number_of_Employees__c}>
+      </lightning-formatted-number>
+    </p>
+    <p class="slds-text-body_small">
+      <lightning-formatted-text	class="slds-text-title_bold"
+        value="Type: ">
+      </lightning-formatted-text>
+      <lightning-formatted-text
+        value={account.Type}>
+      </lightning-formatted-text>
+    </p>
+  </div>
+</div>
 </template>
