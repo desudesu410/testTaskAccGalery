@@ -18,14 +18,14 @@ public class TestAccountController {
         system.assertEquals(someAccounts.size(), 1);
     }
     @isTest
-    public static void TestSumBudgetAcoountsSoql() {
+    public static void TestSumBudgetAccountsSoql() {
         Double sumBudgetAllAccountsSoql = AccountController.getsumBudgetAccountsSoql('allTypes');
         Double sumBudgetSomeAccountsSoql = AccountController.getsumBudgetAccountsSoql('Type20');
         system.assertEquals(sumBudgetAllAccountsSoql, 200000);
         system.assertEquals(sumBudgetSomeAccountsSoql, 1000);
     }
     @isTest
-    public static void TestSumBudgetAcoountsApex() {
+    public static void TestSumBudgetAccountsApex() {
         Double sumBudgetAllAccountsApex = AccountController.getsumBudgetAccountsApex('allTypes');
         Double sumBudgetSomeAccountsApex = AccountController.getsumBudgetAccountsApex('Type111');
         system.assertEquals(sumBudgetAllAccountsApex, 200000);

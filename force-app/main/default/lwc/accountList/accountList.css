@@ -1,5 +1,6 @@
 .list-item {
-  width: 240px;
-  height: 380px;
   background: linear-gradient(180deg, #eeeeee 60%, #dfdfdf 100%);
+}
+.amount-budgets, .picklist {
+  min-width: 210px;
 }

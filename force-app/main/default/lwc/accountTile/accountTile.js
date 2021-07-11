@@ -7,8 +7,11 @@ export default class AccountTile extends LightningElement {
 
   handleAccountDetail() {
     const selectEvent = new CustomEvent('accountclick', {
-      detail: this.account
+      detail: {
+        account: this.account, 
+        clickedAccountTile: this.template.firstChild
+      }
     });
     this.dispatchEvent(selectEvent);
   }
-}
+} 

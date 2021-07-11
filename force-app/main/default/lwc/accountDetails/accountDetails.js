@@ -7,7 +7,6 @@ import ACCOUNT_DETAILS_UPDATED_CHANNEL from '@salesforce/messageChannel/Account_
 export default class AccountDetails extends NavigationMixin(LightningElement) {
   subscriptionToDetails = null;
   account;
-
   @wire(MessageContext) messageContext;
 
   connectedCallback() {

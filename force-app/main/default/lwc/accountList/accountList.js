@@ -18,25 +18,21 @@ export default class AccountList extends LightningElement {
     fieldApiName: TYPE_FIELD
   }) accountTypesPicklistValues;
   accounts;
-  accountsError;
+  errorAccounts;
+  sumBudgetAccountsJs;
   sumBudgetAccountsSoql;
-  sumBudgetAccountsSoqlError;
+  errorSumBudgetAccountsSoql;
   sumBudgetAccountsApex;
-  sumBudgetAccountsApexError;
+  errorSumBudgetAccountsSoql;
   picklistValueSelected = 'allTypes';
+  selectedTile;
 
   get picklistOptions() {
     const allTypesValue = {value: 'allTypes', label: 'All Types'};
-    const options = JSON.stringify(this.accountTypesPicklistValues?.data?.values);
-    return options 
-      ? [allTypesValue, ...JSON.parse(options)]
-      : [allTypesValue];
-  }
-
-  get sumBudgetAccounts() {
-    return this.accounts?.reduce((sum, currAccount) => {
-      return sum + (currAccount.Budget__c || 0);
-    }, 0);
+    const options = JSON.stringify(this.accountTypesPicklistValues.data?.values);
+    if (options) {
+      return [allTypesValue, ...JSON.parse(options)];
+    }
   }
 
   connectedCallback() {
@@ -47,44 +43,56 @@ export default class AccountList extends LightningElement {
     getAccounts({accountType: this.picklistValueSelected})
       .then(result => {
         this.accounts = result;
-        this.accountsError = undefined;
+        this.errorAccounts = undefined;
+        this.sumBudgetAccountsJs = this.sumBudgetAccounts(this.accounts);
       })
       .catch(error => {
-        this.accountsError = error;
+        this.errorAccounts = error;
         this.accounts = undefined;
       });
 
     getsumBudgetAccountsSoql({accountType: this.picklistValueSelected})
       .then(result => {
         this.sumBudgetAccountsSoql = result;
-        this.sumBudgetAccountsSoqlError = undefined;
+        this.errorSumBudgetAccountsSoql = undefined;
       })
       .catch(error => {
-        this.sumBudgetAccountsSoqlError = error;
+        this.errorSumBudgetAccountsSoql = error;
         this.sumBudgetAccountsSoql = undefined;
       });
 
     getsumBudgetAccountsApex({accountType: this.picklistValueSelected})
       .then(result => {
         this.sumBudgetAccountsApex = result;
-        this.sumBudgetAccountsApexError = undefined;
+        this.errorSumBudgetAccountsSoql = undefined;
       })
       .catch(error => {
-        this.sumBudgetAccountsApexError = error;
+        this.errorSumBudgetAccountsSoql = error;
         this.sumBudgetAccountsApex = undefined;
       });
   }
   
-  handleAccountTypesChange(event) {
+  handleChangeAccountTypes(event) {
     this.picklistValueSelected = event.detail.value;
     this.getAccountsData();
   }
 
   handleAccountDetails(event) {
+    const clickedTile = event.detail.clickedAccountTile;
+    if(this.selectedTile) {
+      this.selectedTile.classList.remove('selected');
+    }
+    clickedTile.classList.add('selected');
+    this.selectedTile = clickedTile;
     const message = {
-      account: event.detail,
+      account: event.detail.account,
     };
     publish(this.messageContext, ACCOUNT_DETAILS_UPDATED_CHANNEL, message);
   }
 
+  sumBudgetAccounts(accounts) {
+    return accounts.reduce((sum, currAccount) => {
+      return sum + (currAccount.Budget__c || 0);
+    }, 0);
+  }
 }
