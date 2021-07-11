@@ -4,12 +4,12 @@ public with sharing class AccountController {
 		if (accountType == 'allTypes') {
 			return [
 				SELECT
-					Id, 
-					Name, 
+					Id,   
+					Name,
 					Owner.Name,
 					Budget__c,
 					Number_of_Employees__c, 
-					Picture_Url__c,
+					Building_Photo__c,
 					Type,
 					Industry,
 					Description
@@ -24,7 +24,7 @@ public with sharing class AccountController {
 				Owner.Name,
 				Budget__c,
 				Number_of_Employees__c, 
-				Picture_Url__c,
+				Building_Photo__c,
 				Type,
 				Industry,
 				Description
@@ -34,7 +34,7 @@ public with sharing class AccountController {
 		];
 	}
 
-	@AuraEnabled
+	@AuraEnabled(Cacheable = true)
 	public static Double getsumBudgetAccountsSoql(String accountType) {
 		List<AggregateResult> sumBudget = new List<AggregateResult>();
 		if (accountType == 'allTypes') {
@@ -55,7 +55,7 @@ public with sharing class AccountController {
 		return result;
 	}
 
-	@AuraEnabled
+	@AuraEnabled(Cacheable = true)
 	public static Double getsumBudgetAccountsApex(String accountType) {
 		Double sumBudget = 0;
 		List<Account> listAccount = getAccounts(accountType);
@@ -65,5 +65,5 @@ public with sharing class AccountController {
 			}
 		}
 		return sumBudget;
-	}
+	}		
 }

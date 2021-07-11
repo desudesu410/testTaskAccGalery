@@ -1,5 +1,30 @@
+.account-tile {
+  width: 260px;
+  height: 380px;
+  border-radius: 5px;
+}
+.account-tile:hover {
+  box-shadow: 0 0 10px 5px #cfcfcf;
+  cursor: pointer;
+}
 .account-image {
-  width: 210px;
-  height: 200px;  
+  width: 220px;
+  height: 210px;  
   border: 1px solid #013252;
+}
+.account-tile.selected {
+  transform: translate(2px, -2px);
+  border: 1px solid #000000;
+  box-shadow: -10px 10px 15px #a3a3a3;
+  transition: .3s;
+  cursor: default;
+}
+@media(max-width: 400px) {
+  .account-tile{
+    width: 200px;
+  }
+  .account-image {
+    width: 190px;
+    height: 180px;  
+  }
 }

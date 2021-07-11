@@ -1,18 +1,18 @@
 <template>
-	<div onclick={handleAccountDetail}>
-		<template if:true={account.Picture_Url__c}>
+	<div onclick={handleAccountDetail} class='account-tile slds-box slds-p-around_small'>
+		<template if:true={account.Building_Photo__c}>
 			<img class="slds-align_absolute-center account-image" 
-				src={account.Picture_Url__c} 
+				src={account.Building_Photo__c} 
 				alt="Account photo"
 			>
 		</template>
-		<template if:false={account.Picture_Url__c}>
+		<template if:false={account.Building_Photo__c}>
 			<img class="slds-align_absolute-center account-image"
 				src={noPictureImage} 
 				alt="No Photo"
 			>
 		</template>
-		<div class="slds-m-top_xx-small">
+		<div class="slds-m-top_xx-small slds-m-left_xx-small">
 			<p class="slds-text-body_regular">
 				<lightning-formatted-text class="slds-text-title_bold"
 					value="Name: ">
