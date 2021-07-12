@@ -24,7 +24,7 @@ export default class AccountList extends LightningElement {
   sumBudgetAccountsSoql;
   errorSumBudgetAccountsSoql;
   sumBudgetAccountsApex;
-  errorSumBudgetAccountsSoql;
+  errorSumBudgetAccountsApex;
   selectedTile;
 
   get picklistOptions() {
@@ -67,7 +67,7 @@ export default class AccountList extends LightningElement {
         this.errorSumBudgetAccountsSoql = undefined;
       })
       .catch(error => {
-        this.errorSumBudgetAccountsSoql = error;
+        this.errorSumBudgetAccountsApex = error;
         this.sumBudgetAccountsApex = undefined;
       });
   }
